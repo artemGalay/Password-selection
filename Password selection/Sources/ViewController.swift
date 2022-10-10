@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     //MARK: - UIElements
 
-    private let backgroundView: UIImageView = {
+    private lazy var backgroundView: UIImageView = {
         let imageViewBackground = UIImageView(frame: UIScreen.main.bounds)
         imageViewBackground.image = UIImage(named: "background")
         imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +46,15 @@ class ViewController: UIViewController {
         return textField
     }()
 
+    private lazy var guessedPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Your password: "
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .purple
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     var isDoor: Bool = true {
         didSet {
             if isDoor {
@@ -69,6 +78,7 @@ class ViewController: UIViewController {
         view.addSubview(changeBackgroundButton)
         view.addSubview(setupButton)
         view.addSubview(passwordTextField)
+        view.addSubview(guessedPasswordLabel)
     }
 
     private func setupLayout() {
@@ -91,7 +101,10 @@ class ViewController: UIViewController {
             passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             passwordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             passwordTextField.widthAnchor.constraint(equalToConstant: 150),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 30)
+            passwordTextField.heightAnchor.constraint(equalToConstant: 30),
+
+            guessedPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
+            guessedPasswordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 
