@@ -12,6 +12,7 @@
 		D9F3F79F28F3F75200CA631D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F3F79E28F3F75200CA631D /* ViewController.swift */; };
 		D9F3F7A428F3F75200CA631D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F3F7A328F3F75200CA631D /* Assets.xcassets */; };
 		D9F3F7A728F3F75200CA631D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F3F7A528F3F75200CA631D /* LaunchScreen.storyboard */; };
+		D9F3F7B228F41F8800CA631D /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F3F7B128F41F8800CA631D /* String + Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D9F3F7A328F3F75200CA631D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9F3F7A628F3F75200CA631D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9F3F7A828F3F75200CA631D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9F3F7B128F41F8800CA631D /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				D9F3F7AE28F3F8FE00CA631D /* App */,
-				D9F3F79E28F3F75200CA631D /* ViewController.swift */,
+				D9F3F7B328F41FC500CA631D /* Sources */,
 				D9F3F7AF28F3F90900CA631D /* Resources */,
+				D9F3F7B028F41F7000CA631D /* Extension */,
 			);
 			path = "Password selection";
 			sourceTree = "<group>";
@@ -78,6 +81,22 @@
 				D9F3F7A828F3F75200CA631D /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D9F3F7B028F41F7000CA631D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D9F3F7B128F41F8800CA631D /* String + Extensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D9F3F7B328F41FC500CA631D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D9F3F79E28F3F75200CA631D /* ViewController.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +171,7 @@
 			files = (
 				D9F3F79F28F3F75200CA631D /* ViewController.swift in Sources */,
 				D9F3F79B28F3F75200CA631D /* AppDelegate.swift in Sources */,
+				D9F3F7B228F41F8800CA631D /* String + Extensions.swift in Sources */,
 				D9F3F79D28F3F75200CA631D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
