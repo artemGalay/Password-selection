@@ -33,6 +33,15 @@ class ViewController: UIViewController {
         return button
     }()
 
+    private lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.isSecureTextEntry = true
+        textField.backgroundColor = .purple
+        textField.layer.cornerRadius = 15
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+
     var isDoor: Bool = true {
         didSet {
             if isDoor {
@@ -55,6 +64,7 @@ class ViewController: UIViewController {
         view.addSubview(backgroundView)
         view.addSubview(changeBackgroundButton)
         view.addSubview(setupButton)
+        view.addSubview(passwordTextField)
     }
 
     private func setupLayout() {
@@ -72,7 +82,12 @@ class ViewController: UIViewController {
             setupButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 310),
             setupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             setupButton.widthAnchor.constraint(equalToConstant: 120),
-            setupButton.heightAnchor.constraint(equalToConstant: 120)
+            setupButton.heightAnchor.constraint(equalToConstant: 120),
+
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 200),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 
