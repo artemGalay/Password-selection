@@ -38,6 +38,10 @@ class ViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.backgroundColor = .purple
         textField.layer.cornerRadius = 15
+        textField.attributedPlaceholder = NSAttributedString(string: "password",
+                                                             attributes:
+                                                                [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        textField.textAlignment = .center
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -85,9 +89,9 @@ class ViewController: UIViewController {
             setupButton.heightAnchor.constraint(equalToConstant: 120),
 
             passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 200),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 40)
+            passwordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 150),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 
