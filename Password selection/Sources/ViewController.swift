@@ -84,8 +84,9 @@ final class ViewController: UIViewController {
         }
     }
 
-    var isStart = false
     var isCycleRunning = true
+    var isStartBrute = false
+    var isSuccess = false
 
     //MARK: - Lifecycle
 
@@ -147,39 +148,87 @@ final class ViewController: UIViewController {
     }
 
     @objc func buttonPassed() {
-        isStart = true
-        bruteForce(passwordToUnlock: passwordTextField.text ?? "")
+        guard let passwordEntered = passwordTextField.text, !passwordEntered.isEmpty, !isStartBrute else {
+            return
+        }
+        startAnimationForce()
+        bruteForce(passwordToUnlock: passwordEntered, completion: { [weak self] text in
+            self?.stopAnimationForce()
+            self?.guessedPasswordLabel.text = text
+            self?.isCycleRunning = true
+            self?.isStartBrute = false
+        })
+        isSuccess = false
     }
+    let queue = DispatchQueue.global(qos: .background)
 
     @objc func buttonPressed() {
         isCycleRunning = false
-        guessedPasswordLabel.text = "Ваш пароль \(passwordTextField.text ?? "") не взломан!"
     }
 
-    func bruteForce(passwordToUnlock: String) {
+
+//    func bruteForce(passwordToUnlock: String) -> String {
+//
+//
+//        let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
+//
+//        var password: String = ""
+
+//        let queue = DispatchQueue.global(qos: .background)
+//        queue.async {
+//            if self.isStart {
+//                while password != passwordToUnlock {
+//                    self.isStart = false
+//                    password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+//                    DispatchQueue.main.async {
+//                        self.activityIndicatorView.startAnimating()
+//                        self.stopButton.isHidden = false
+//                        self.guessedPasswordLabel.text = password
+//                    }
+//                }
+//                DispatchQueue.main.async {
+//                    self.guessedPasswordLabel.text = password
+//                    self.passwordTextField.isSecureTextEntry = false
+//                    self.activityIndicatorView.stopAnimating()
+//                    self.stopButton.isHidden = true
+//                }
+//                return password
+//            }
+//            return ""
+//        }
+//    }
+
+    func startAnimationForce() {
+        self.activityIndicatorView.startAnimating()
+        self.stopButton.isHidden = false
+    }
+
+    func stopAnimationForce() {
+        self.passwordTextField.isSecureTextEntry = false
+        self.activityIndicatorView.stopAnimating()
+        self.stopButton.isHidden = true
+    }
+
+    func bruteForce(passwordToUnlock: String, completion: @escaping (String) -> Void?){
 
         let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
-
         var password: String = ""
+        isStartBrute = true
 
         let queue = DispatchQueue.global(qos: .background)
         queue.async {
-            if self.isStart {
-                while password != passwordToUnlock {
-                    self.isStart = false
-                    password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-                    DispatchQueue.main.async {
-                        self.activityIndicatorView.startAnimating()
-                        self.stopButton.isHidden = false
-                        self.guessedPasswordLabel.text = password
-                    }
-                }
+            while self.isCycleRunning == true {
+                password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
                 DispatchQueue.main.async {
                     self.guessedPasswordLabel.text = password
-                    self.passwordTextField.isSecureTextEntry = false
-                    self.activityIndicatorView.stopAnimating()
-                    self.stopButton.isHidden = true
                 }
+                if password == passwordToUnlock {
+                    self.isSuccess = true
+                    self.isCycleRunning = false
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                completion(self?.isSuccess == true ? password : passwordToUnlock)
             }
         }
     }
