@@ -9,6 +9,10 @@ import UIKit
 
 final class ViewController: UIViewController {
 
+    var isCycleRunning = true
+    var isStartBrute = false
+    var isSuccess = false
+
     //MARK: - UIElements
 
     private lazy var backgroundView: UIImageView = {
@@ -21,7 +25,7 @@ final class ViewController: UIViewController {
     private lazy var setupButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "password")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(self, action: #selector(buttonPassed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonStart), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -29,7 +33,7 @@ final class ViewController: UIViewController {
     private lazy var changeBackgroundButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "change")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonChangeBackground), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -68,7 +72,7 @@ final class ViewController: UIViewController {
     private lazy var stopButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "stop")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonStop), for: .touchUpInside)
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -84,10 +88,6 @@ final class ViewController: UIViewController {
         }
     }
 
-    var isCycleRunning = true
-    var isStartBrute = false
-    var isSuccess = false
-
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -95,6 +95,8 @@ final class ViewController: UIViewController {
         setupHierarchy()
         setupLayout()
     }
+
+    //MARK: - Setup
 
     private func setupHierarchy() {
         view.addSubview(backgroundView)
@@ -143,11 +145,13 @@ final class ViewController: UIViewController {
         ])
     }
 
-    @objc func buttonTapped() {
+    //MARK: - Actions
+
+    @objc func buttonChangeBackground() {
         isDoor.toggle()
     }
 
-    @objc func buttonPassed() {
+    @objc func buttonStart() {
         guard let passwordEntered = passwordTextField.text, !passwordEntered.isEmpty, !isStartBrute else {
             return
         }
@@ -160,43 +164,10 @@ final class ViewController: UIViewController {
         })
         isSuccess = false
     }
-    let queue = DispatchQueue.global(qos: .background)
 
-    @objc func buttonPressed() {
+    @objc func buttonStop() {
         isCycleRunning = false
     }
-
-
-//    func bruteForce(passwordToUnlock: String) -> String {
-//
-//
-//        let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
-//
-//        var password: String = ""
-
-//        let queue = DispatchQueue.global(qos: .background)
-//        queue.async {
-//            if self.isStart {
-//                while password != passwordToUnlock {
-//                    self.isStart = false
-//                    password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//                    DispatchQueue.main.async {
-//                        self.activityIndicatorView.startAnimating()
-//                        self.stopButton.isHidden = false
-//                        self.guessedPasswordLabel.text = password
-//                    }
-//                }
-//                DispatchQueue.main.async {
-//                    self.guessedPasswordLabel.text = password
-//                    self.passwordTextField.isSecureTextEntry = false
-//                    self.activityIndicatorView.stopAnimating()
-//                    self.stopButton.isHidden = true
-//                }
-//                return password
-//            }
-//            return ""
-//        }
-//    }
 
     func startAnimationForce() {
         self.activityIndicatorView.startAnimating()
@@ -209,7 +180,7 @@ final class ViewController: UIViewController {
         self.stopButton.isHidden = true
     }
 
-    func bruteForce(passwordToUnlock: String, completion: @escaping (String) -> Void?){
+    func bruteForce(passwordToUnlock: String, completion: @escaping (String) -> Void?) {
 
         let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
         var password: String = ""
