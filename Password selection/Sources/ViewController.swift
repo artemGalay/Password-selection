@@ -182,14 +182,14 @@ final class ViewController: UIViewController {
 
     func bruteForce(passwordToUnlock: String, completion: @escaping (String) -> Void?) {
 
-        let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
+        let allowedCharacters: [String] = String().printable.map { String($0) }
         var password: String = ""
         isStartBrute = true
 
         let queue = DispatchQueue(label: "queue", qos: .background)
         queue.async {
             while self.isCycleRunning == true {
-                password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+                password = generateBruteForce(password, fromArray: allowedCharacters)
                 DispatchQueue.main.async {
                     self.guessedPasswordLabel.text = password
                 }
