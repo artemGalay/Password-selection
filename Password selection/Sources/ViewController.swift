@@ -186,7 +186,7 @@ final class ViewController: UIViewController {
         var password: String = ""
         isStartBrute = true
 
-        let queue = DispatchQueue.global(qos: .background)
+        let queue = DispatchQueue(label: "queue", qos: .background)
         queue.async {
             while self.isCycleRunning == true {
                 password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
