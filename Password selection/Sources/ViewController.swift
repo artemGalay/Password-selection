@@ -17,7 +17,7 @@ final class PasswordViewController: UIViewController {
 
     private lazy var backgroundView: UIImageView = {
         let imageViewBackground = UIImageView()
-        imageViewBackground.image = UIImage(named: "mainBackground")
+        imageViewBackground.image = UIImage(named: MetricPasswordViewController.backgroundViewImage)
         imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
         return imageViewBackground
     }()
@@ -62,13 +62,19 @@ final class PasswordViewController: UIViewController {
         return button
     }
 
-    private lazy var startButton = makeButton(imageNamed: "password", action: #selector(buttonStart), isHidden: false)
-    private lazy var changeBackgroundButton = makeButton(imageNamed: "change", action: #selector(buttonChangeBackground), isHidden: false)
-    private lazy var stopButton = makeButton(imageNamed: "stop", action: #selector(buttonStop), isHidden: true)
+    private lazy var startButton = makeButton(imageNamed: MetricPasswordViewController.startButtonImage,
+                                              action: #selector(buttonStart),
+                                              isHidden: false)
+    private lazy var changeBackgroundButton = makeButton(imageNamed: MetricPasswordViewController.changeBackgroundButtonImage,
+                                                         action: #selector(buttonChangeBackground),
+                                                         isHidden: false)
+    private lazy var stopButton = makeButton(imageNamed: MetricPasswordViewController.stopButtonImage,
+                                             action: #selector(buttonStop),
+                                             isHidden: true)
 
     private var isDoor: Bool = true {
         didSet {
-            backgroundView.image = isDoor ? UIImage(named: "mainBackground"): UIImage(named: "newBackground")
+            backgroundView.image = isDoor ? UIImage(named: MetricPasswordViewController.backgroundViewImage): UIImage(named: MetricPasswordViewController.newBackgroundViewImage)
         }
     }
 

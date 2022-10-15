@@ -10,6 +10,12 @@ import Foundation
 extension PasswordViewController {
     struct MetricPasswordViewController {
 
+        static let backgroundViewImage: String = "mainBackground"
+        static let newBackgroundViewImage: String = "newBackground"
+        static let startButtonImage: String = "password"
+        static let changeBackgroundButtonImage: String = "change"
+        static let stopButtonImage: String = "stop"
+
         static let textFieldLayerCornerRadius: CGFloat = 15
         static let textFieldLayerBorderWidth: CGFloat = 2
 
