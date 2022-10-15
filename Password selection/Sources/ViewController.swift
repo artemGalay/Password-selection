@@ -16,9 +16,8 @@ final class PasswordViewController: UIViewController {
     //MARK: - UIElements
 
     private lazy var backgroundView: UIImageView = {
-        let imageViewBackground = UIImageView()
+        let imageViewBackground = UIImageView(frame: UIScreen.main.bounds)
         imageViewBackground.image = MetricPasswordViewController.backgroundViewImage
-        imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
         return imageViewBackground
     }()
 
@@ -100,10 +99,6 @@ final class PasswordViewController: UIViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             changeBackgroundButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             changeBackgroundButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,
