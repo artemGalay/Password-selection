@@ -5,16 +5,16 @@
 //  Created by Артем Галай on 13.10.22.
 //
 
-import Foundation
+import UIKit
 
 extension PasswordViewController {
     struct MetricPasswordViewController {
 
-        static let backgroundViewImage: String = "mainBackground"
-        static let newBackgroundViewImage: String = "newBackground"
-        static let startButtonImage: String = "password"
-        static let changeBackgroundButtonImage: String = "change"
-        static let stopButtonImage: String = "stop"
+        static let backgroundViewImage: UIImage = UIImage(named: "mainBackground") ?? UIImage()
+        static let newBackgroundViewImage: UIImage = UIImage(named: "newBackground") ?? UIImage()
+        static let startButtonImage: UIImage = UIImage(named: "password") ?? UIImage()
+        static let changeBackgroundButtonImage: UIImage = UIImage(named: "change") ?? UIImage()
+        static let stopButtonImage: UIImage = UIImage(named: "stop") ?? UIImage() 
 
         static let textFieldLayerCornerRadius: CGFloat = 15
         static let textFieldLayerBorderWidth: CGFloat = 2

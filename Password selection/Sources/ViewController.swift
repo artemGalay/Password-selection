@@ -17,7 +17,7 @@ final class PasswordViewController: UIViewController {
 
     private lazy var backgroundView: UIImageView = {
         let imageViewBackground = UIImageView()
-        imageViewBackground.image = UIImage(named: MetricPasswordViewController.backgroundViewImage)
+        imageViewBackground.image = MetricPasswordViewController.backgroundViewImage
         imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
         return imageViewBackground
     }()
@@ -53,28 +53,28 @@ final class PasswordViewController: UIViewController {
         return activityIndicator
     }()
 
-    private func makeButton(imageNamed: String, action: Selector, isHidden: Bool) -> UIButton {
+    private func makeButton(image: UIImage, action: Selector, isHidden: Bool) -> UIButton {
         let button = UIButton()
-        button.setImage(UIImage(named: imageNamed)?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: action, for: .touchUpInside)
         button.isHidden = isHidden
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
 
-    private lazy var startButton = makeButton(imageNamed: MetricPasswordViewController.startButtonImage,
+    private lazy var startButton = makeButton(image: MetricPasswordViewController.startButtonImage,
                                               action: #selector(buttonStart),
                                               isHidden: false)
-    private lazy var changeBackgroundButton = makeButton(imageNamed: MetricPasswordViewController.changeBackgroundButtonImage,
+    private lazy var changeBackgroundButton = makeButton(image: MetricPasswordViewController.changeBackgroundButtonImage,
                                                          action: #selector(buttonChangeBackground),
                                                          isHidden: false)
-    private lazy var stopButton = makeButton(imageNamed: MetricPasswordViewController.stopButtonImage,
+    private lazy var stopButton = makeButton(image: MetricPasswordViewController.stopButtonImage,
                                              action: #selector(buttonStop),
                                              isHidden: true)
 
     private var isDoor: Bool = true {
         didSet {
-            backgroundView.image = isDoor ? UIImage(named: MetricPasswordViewController.backgroundViewImage): UIImage(named: MetricPasswordViewController.newBackgroundViewImage)
+            backgroundView.image = isDoor ? MetricPasswordViewController.backgroundViewImage: MetricPasswordViewController.newBackgroundViewImage
         }
     }
 
